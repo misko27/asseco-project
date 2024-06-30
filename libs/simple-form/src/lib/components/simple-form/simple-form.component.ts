@@ -8,19 +8,54 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SimpleFormComponent {
 
-  registrationForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+
+  squareRootForm:FormGroup = this.fb.group({
+    inputValue: ['', ],
+    outputValue: ['', ],
   });
 
   constructor(private fb: FormBuilder) {}
   
-  onSubmit(): void {
-    if (this.registrationForm.valid) {
-      console.log(this.registrationForm.value);
-    } else {
-      console.log('Form is not valid');
+  
+
+  readonly calculateSquareRoot = () => {
+    this.squareRootForm.markAllAsTouched();
+    if (this.squareRootForm.valid) {
+
+      const inputNumber = +(this.squareRootForm.controls['inputValue'].value ?? 0);
+      let result = 0;
+      const step = 0;
+      let guess = 0;
+
+      for (let i = 0; i <= inputNumber; i++) {
+        if (i * i === inputNumber) {
+          result = i;
+          break
+        } else if (i * i > inputNumber) {
+          guess = i - 1;
+          result = this.helperFunction(guess, step, inputNumber);
+          break;
+        }
+      }
+
+      this.squareRootForm.controls['outputValue'].setValue(String(result));
+      return
     }
+  };
+
+  helperFunction(result: number, step: number, inputNumber: number): number {
+    if (step > 3) {
+      return result;
+    }
+    for (let j = 0; j <= 9; j++) {
+      const guess = +(result + (j / Math.pow(10, step))).toFixed(step);
+      if (guess * guess === inputNumber) {
+        return guess
+      } else if (guess * guess > inputNumber) {
+        return this.helperFunction(result + ((j - 1) / Math.pow(10, step)), step + 1, inputNumber);
+      }
+
+    }
+    return result;
   }
 }

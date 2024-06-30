@@ -10,53 +10,69 @@ Enhance your Nx experience by installing [Nx Console](https://nx.dev/nx-console)
 provides an interactive UI to view your projects, run tasks, generate code, and more! Available for VSCode, IntelliJ and
 comes with a LSP for Vim users.
 
+
+
 ## Start the application
 
-Run `npx nx serve app1` to start the development server. Happy coding!
-
-## Build for production
-
-Run `npx nx build app1` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
-
-## Running tasks
-
-To execute tasks with Nx use the following syntax:
+To serve host and remote app
 
 ```
-npx nx <target> <project> <...options>
+npm run dev 
 ```
 
-You can also run multiple targets:
+## SWOT
 
-```
-npx nx run-many -t <target1> <target2>
-```
+Strengths
+Decoupled Development:
 
-..or add `-p` to filter specific projects
+Teams can work independently on different parts of the application without needing to synchronize deployments, which speeds up the development process.
+Scalability:
 
-```
-npx nx run-many -t <target1> <target2> -p <proj1> <proj2>
-```
+Supports the scaling of projects by allowing new features to be added as separate applications without impacting the main application, facilitating large-scale project management.
+Reusability:
 
-Targets can be defined in the `package.json` or `projects.json`. Learn more [in the docs](https://nx.dev/features/run-tasks).
+Components and modules can be reused across different parts of the application or even across different projects, reducing duplication of effort and increasing consistency.
+Incremental Upgrades:
 
-## Set up CI!
+Allows different parts of an application to be updated independently, enabling incremental upgrades without the need for a full application redeployment.
+Weaknesses
+Complexity in Configuration:
 
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
+Setting up Module Federation, especially for the first time or in complex scenarios, can be challenging and may require deep understanding of both the module system and the build tools.
+Performance Concerns:
 
-- [Set up remote caching](https://nx.dev/features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/nx-cloud/features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
+Potential for increased load times due to the need to fetch additional code at runtime. Care must be taken to optimize dynamic imports and dependency sharing.
+Version Mismatch and Dependency Management:
 
-## Explore the project graph
+Managing dependencies between different microfrontends can become cumbersome, especially when different versions of libraries are used.
+Styling Conflicts:
 
-Run `npx nx graph` to show the graph of the workspace.
-It will show tasks that you can run with Nx.
+As discussed, styling can become complicated when multiple applications are involved, with risks of conflicting styles unless carefully managed.
+Opportunities
+Microfrontend Architecture:
 
-- [Learn more about Exploring the Project Graph](https://nx.dev/core-features/explore-graph)
+Module Federation is inherently suitable for microfrontend architectures, which are becoming more popular as enterprises scale and modularize their applications.
+Innovative Deployment Models:
 
-## Connect with us!
+Enables more flexible deployment models, such as different parts of the application being deployed on different schedules based on feature readiness or business requirements.
+Improved Collaboration:
 
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
+Facilitates better collaboration between teams by defining clear boundaries and contracts for shared modules, potentially reducing bottlenecks in large teams.
+Enhanced Testing:
+
+Independent development and deployment of modules may improve the granularity and effectiveness of testing by isolating changes to specific parts of the application.
+Threats
+Security Risks:
+
+Increased surface area for security vulnerabilities due to multiple entry points and the integration of independently developed modules.
+Technical Debt:
+
+If not managed well, the setup can lead to significant technical debt, including tangled dependencies and difficult-to-trace bugs due to complex interactions between federated modules.
+Learning Curve and Adoption:
+
+The complexity of Module Federation may lead to a steep learning curve, potentially slowing down adoption and requiring significant training for development teams.
+Overengineering:
+
+There's a risk of overengineering solutions when the use of Module Federation is not justified by the project’s scope or scale, leading to unnecessary complexity.
+In summary, while Module Federation offers substantial benefits for developing modern web applications, it also requires careful management and strategic planning to mitigate the inherent complexities and potential pitfalls associated with its use.
+

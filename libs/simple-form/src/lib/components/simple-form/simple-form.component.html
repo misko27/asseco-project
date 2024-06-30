@@ -1,23 +1,6 @@
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" formControlName="name">
-      <div *ngIf="registrationForm.get('name')?.errors?.['required']">Name is required</div>
-    </div>
-  
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" formControlName="email">
-      <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required</div>
-      <div *ngIf="registrationForm.get('email')?.errors?.['email']">Email is not valid</div>
-    </div>
-  
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" formControlName="password">
-      <div *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required</div>
-      <div *ngIf="registrationForm.get('password')?.errors?.['minLength']">Password must be at least 6 characters</div>
-    </div>
-  
-    <button type="submit" [disabled]="!registrationForm.valid">Register</button>
-  </form>
+<p>Test function Calculate squareroot of a number:</p>
+<form [formGroup]="squareRootForm" (submit)="calculateSquareRoot()" >
+  <input type="text" formControlName="inputValue">
+  <button type="submit">Calculate</button>
+  <input type="text" formControlName="outputValue" >
+</form>

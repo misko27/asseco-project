@@ -4,6 +4,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   selector: 'app-nx-welcome',
   template: `
    ahoj som remote  
+     <lib-simple-form></lib-simple-form>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,

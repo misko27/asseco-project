@@ -4,6 +4,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   selector: 'app-nx-welcome',
   template: `
     ahoj som host
+  
   `,
   styles: [],
   encapsulation: ViewEncapsulation.None,
