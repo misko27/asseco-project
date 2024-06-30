@@ -1,30 +1,30 @@
 {
-  "name": "app1",
+  "name": "app2",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/app1/src",
+  "sourceRoot": "apps/app2/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/app1",
-        "index": "apps/app1/src/index.html",
-        "main": "apps/app1/src/main.ts",
+        "outputPath": "dist/apps/app2",
+        "index": "apps/app2/src/index.html",
+        "main": "apps/app2/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/app1/tsconfig.app.json",
+        "tsConfig": "apps/app2/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/app1/public"
+            "input": "apps/app2/public"
           }
         ],
-        "styles": ["apps/app1/src/styles.css"],
+        "styles": ["apps/app2/src/styles.css"],
         "scripts": [],
         "customWebpackConfig": {
-          "path": "apps/app1/webpack.config.ts"
+          "path": "apps/app2/webpack.config.ts"
         }
       },
       "configurations": {
@@ -43,7 +43,7 @@
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "apps/app1/webpack.prod.config.ts"
+            "path": "apps/app2/webpack.prod.config.ts"
           }
         },
         "development": {
@@ -58,17 +58,17 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nx/angular:dev-server",
+      "executor": "@nx/angular:module-federation-dev-server",
       "options": {
-        "port": 4201,
-        "publicHost": "http://localhost:4201"
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
       },
       "configurations": {
         "production": {
-          "buildTarget": "app1:build:production"
+          "buildTarget": "app2:build:production"
         },
         "development": {
-          "buildTarget": "app1:build:development"
+          "buildTarget": "app2:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "app1:build"
+        "buildTarget": "app2:build"
       }
     },
     "lint": {
@@ -86,24 +86,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/app1/jest.config.ts"
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "defaultConfiguration": "production",
-      "options": {
-        "buildTarget": "app1:build",
-        "port": 4201,
-        "watch": false
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "app1:build:development"
-        },
-        "production": {
-          "buildTarget": "app1:build:production"
-        }
+        "jestConfig": "apps/app2/jest.config.ts"
       }
     }
   }
